@@ -82,6 +82,16 @@ public class Main {
             .subscribe(System.out::println);
     }
 
+    void operadorFlapMap(){
+        Observable ob01 =  Observable.range(1,5);
+        Observable ob02 =  Observable.range(5,5);
+
+        ob01
+            .doOnNext(x -> System.out.println("flujo: " + x))
+            .flatMap(x -> ob02.map(v -> String.format("nuevo %s", v)))
+            .subscribe(System.out::println);
+    }
+
     void operadoresCombinacion(){
         Observable<Integer> ob01 =  Observable.just(1,2,3,4);
         Observable<Integer> ob02 =  Observable.just(5,6,7,8);
@@ -96,7 +106,8 @@ public class Main {
         //app.metodoObservadorLambda();
         //app.metodosObservable();
         //app.error();
-        app.operadoresCombinacion();
+        //app.operadoresCombinacion();
+        app.operadorFlapMap();
 
 //        app.createObservableExplicita()
 //            .doOnNext(integer -> System.out.println("value: "+integer))
